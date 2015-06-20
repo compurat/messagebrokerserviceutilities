@@ -9,6 +9,7 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.util.EntityUtils;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -24,7 +25,7 @@ import java.util.Set;
 public class ServiceConnector {
 
     private static final String UTF_8 = "UTF-8";
-
+    private static final Logger LOGGER = Logger.getLogger(ServiceConnector.class);
     public String getServiceResponse(final String url, final  Map<String, AbstractContentBody> parts) {
         String response = null;
         DefaultHttpClient client = new DefaultHttpClient();
@@ -35,6 +36,7 @@ public class ServiceConnector {
         try {
             response = EntityUtils.toString(client.execute(post).getEntity(), UTF_8);
         } catch (IOException e) {
+            LOGGER.error("could not access service.");
             e.printStackTrace();
         }
 
