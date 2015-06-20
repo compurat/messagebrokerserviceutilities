@@ -23,6 +23,8 @@ import java.util.Set;
 @Service
 public class ServiceConnector {
 
+    private static final String UTF_8 = "UTF-8";
+
     public String getServiceResponse(final String url, final  Map<String, AbstractContentBody> parts) {
         String response = null;
         DefaultHttpClient client = new DefaultHttpClient();
@@ -31,7 +33,7 @@ public class ServiceConnector {
         MultipartEntity multipartEntity = createEntity(parts);
         post.setEntity(multipartEntity);
         try {
-            response = EntityUtils.toString(client.execute(post).getEntity(), "UTF-8");
+            response = EntityUtils.toString(client.execute(post).getEntity(), UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
