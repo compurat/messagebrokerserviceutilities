@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @RunWith(MockitoJUnitRunner.class)
-public class STringUtilsTest {
+public class StringConversionsTest {
     private static final String TEST_TEXT="Hello world";
     private static final String TEST_EMPTY= "";
     private static final String TEST_KANJI= "今日は";
