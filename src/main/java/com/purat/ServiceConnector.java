@@ -48,7 +48,6 @@ public class ServiceConnector {
 
     private MultipartEntity createEntity(final Map<String, AbstractContentBody> parts) {
         MultipartEntity entity = new MultipartEntity( HttpMultipartMode.BROWSER_COMPATIBLE );
-
         Set<String> keys = parts.keySet();
         for(String key: keys) {
             entity.addPart(key, parts.get(key));
