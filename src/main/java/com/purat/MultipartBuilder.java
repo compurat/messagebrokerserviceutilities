@@ -24,12 +24,13 @@ public class MultipartBuilder<T> {
         ConnectionName connectionName = bean.getClass().getDeclaredAnnotation(ConnectionName.class);
         try {
             if(connectionName != null) {
-                parts.put(FieldNames.connection.name() , new StringBody(String.valueOf(connectionName.connectionName())));
+                String connectionNameValue = connectionName.connectionName();
+                parts.put(FieldNames.connection.name() , new StringBody(connectionNameValue));
             }
             Field[] fields = bean.getClass().getDeclaredFields();
             for(Field field : fields) {
                 field.setAccessible(true);
-                FieldName fieldName = field.getAnnotation(FieldName.class);
+                FieldName fieldName = field.getDeclaredAnnotation(FieldName.class);
                 String name  = null;
                 if (fieldName != null) {
                     name = fieldName.fieldName();
