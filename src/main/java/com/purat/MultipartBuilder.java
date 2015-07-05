@@ -2,6 +2,7 @@ package com.purat;
 
 import com.purat.annotation.ConnectionName;
 import com.purat.annotation.FieldName;
+import com.purat.annotation.XpathQuery;
 import com.purat.constants.FieldNames;
 import org.apache.http.entity.mime.content.AbstractContentBody;
 import org.apache.http.entity.mime.content.StringBody;
@@ -31,9 +32,12 @@ public class MultipartBuilder<T> {
             for(Field field : fields) {
                 field.setAccessible(true);
                 FieldName fieldName = field.getDeclaredAnnotation(FieldName.class);
+                XpathQuery xpathQuery = field.getDeclaredAnnotation(XpathQuery.class);
                 String name  = null;
                 if (fieldName != null) {
                     name = fieldName.fieldName();
+                } else if (xpathQuery != null) {
+                    name = xpathQuery.xpath();
                 } else {
                     name = field.getName();
                 }
